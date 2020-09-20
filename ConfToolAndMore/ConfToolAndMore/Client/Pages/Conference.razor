@@ -17,7 +17,20 @@
     </div>
     <div class="form-group">
         <label for="country">Country</label>
-        <input disabled="@_isShow" type="text" @bind-value="_conferenceDetails.Country" class="form-control" id="country" placeholder="Location">
+
+        @if (Mode == ConferenceDetailsModes.Show)
+        {
+            <input disabled="@_isShow" type="text" @bind-value="_conferenceDetails.Country" class="form-control" id="country" placeholder="Location">
+        }
+        else
+        {
+            <InputSelect @bind-Value="_conferenceDetails.Country" class="form-control" id="country">
+                @foreach (string country in _countries)
+                    {
+                    <option value="@country">@country</option>
+                    }
+            </InputSelect>
+        }
     </div>
     <div class="form-group">
         <label for="datefrom">From</label>

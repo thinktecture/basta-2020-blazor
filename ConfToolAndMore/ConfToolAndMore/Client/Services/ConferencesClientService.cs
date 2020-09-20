@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace ConfToolAndMore.Client.Services
         public ConferencesClientService(HttpClient httpClient, IConfiguration config)
         {
             _httpClient = httpClient;
-            _baseApiUrl = config["BaseApiUrl"];
+            _baseApiUrl = Path.Combine(config["BaseApiUrl"], "conferences");
         }
 
         public async Task<List<ConferenceOverview>> GetConferencesAsync()
