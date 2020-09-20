@@ -15,7 +15,7 @@ namespace ConfToolAndMore.Client.Services
         public CountriesClientService(HttpClient httpClient, IConfiguration config)
         {
             _httpClient = httpClient;
-            _baseApiUrl = Path.Combine(config["BaseApiUrl"], "countries");
+            _baseApiUrl = Path.Combine(config["BaseApiUrl"], "countries/");
         }
 
         public async Task<List<string>> ListCountriesAsync()

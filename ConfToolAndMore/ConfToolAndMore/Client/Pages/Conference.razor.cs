@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ConfToolAndMore.Client.Services;
 using ConfToolAndMore.Shared.DTO;
@@ -65,6 +66,12 @@ namespace ConfToolAndMore.Client.Pages
             await _conferencesClient.AddConferenceAsync(_conferenceDetails);
 
             Console.WriteLine("NEW Conference added...");
+        }
+
+        private async Task<IEnumerable<string>> FilterCountries(string searchText)
+        {
+            return await Task.FromResult(_countries.Where(
+                c => c.ToLower().Contains(searchText.ToLower())).ToList());
         }
     }
 }

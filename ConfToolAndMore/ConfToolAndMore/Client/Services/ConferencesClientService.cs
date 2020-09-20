@@ -17,7 +17,7 @@ namespace ConfToolAndMore.Client.Services
         public ConferencesClientService(HttpClient httpClient, IConfiguration config)
         {
             _httpClient = httpClient;
-            _baseApiUrl = Path.Combine(config["BaseApiUrl"], "conferences");
+            _baseApiUrl = Path.Combine(config["BaseApiUrl"], "conferences/");
         }
 
         public async Task<List<ConferenceOverview>> GetConferencesAsync()
