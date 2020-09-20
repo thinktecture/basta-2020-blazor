@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using System;
 using ConfToolAndMore.Server.Hubs;
+using IdentityServer4.AccessTokenValidation;
 
 namespace ConfToolAndMore.Server
 {
@@ -27,6 +28,15 @@ namespace ConfToolAndMore.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "https://demo.identityserver.io";
+                    options.ApiName = "api";
+                });
+
+            services.AddAuthorization();
+
             services.AddSignalR();
 
             services.AddDbContext<ConferencesDbContext>(
@@ -43,6 +53,8 @@ namespace ConfToolAndMore.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAuthentication();
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
@@ -67,6 +79,8 @@ namespace ConfToolAndMore.Server
             app.UseStaticFiles();
 
             app.UseRouting();
+
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

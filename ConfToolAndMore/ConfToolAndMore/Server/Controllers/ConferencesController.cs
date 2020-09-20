@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.SignalR;
 using ConfToolAndMore.Server.Hubs;
 using AutoMapper;
 using ConfToolAndMore.Shared.DTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ConfToolAndMore.Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ConferencesController : ControllerBase
