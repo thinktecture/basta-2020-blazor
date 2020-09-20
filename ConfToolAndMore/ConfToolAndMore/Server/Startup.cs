@@ -31,7 +31,7 @@ namespace ConfToolAndMore.Server
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                 .AddIdentityServerAuthentication(options =>
                 {
-                    options.Authority = "https://demo.identityserver.io";
+                    options.Authority = "https://localhost:5006";
                     options.ApiName = "api";
                 });
 
