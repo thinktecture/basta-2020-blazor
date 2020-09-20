@@ -21,6 +21,8 @@ namespace ConfToolAndMore.Client.Pages
         private ConferencesClientService _conferencesClient { get; set; }
         [Inject]
         private CountriesClientService _countriesClient { get; set; }
+        [Inject]
+        private IAlertService _alert { get; set; }
 
         private ConferenceDetails _conferenceDetails = new ConferenceDetails();
         private List<string> _countries;
@@ -54,7 +56,13 @@ namespace ConfToolAndMore.Client.Pages
 
         private async Task SaveConference()
         {
-            await _conferencesClient.AddConferenceAsync(_conferenceDetails);
+            if (!await _alert.ConfirmAsync("Do you want to save this new entry?"))
+            {
+                Console.WriteLine("### User declined to save conference!");
+                return;
+            }
+
+            await _conferencesClient.AddConferenceAsync(_conferenceDetails);
 
             Console.WriteLine("NEW Conference added...");
         }

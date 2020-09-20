@@ -19,6 +19,8 @@ namespace ConfToolAndMore.Client
             builder.Services.AddScoped<ConferencesClientService>();
             builder.Services.AddScoped<CountriesClientService>();
 
+            builder.Services.AddAlerts();
+
             await builder.Build().RunAsync();
         }
     }
