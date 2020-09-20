@@ -55,6 +55,11 @@ namespace ConfToolAndMore.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<ConferenceDetails>> PostConference(ConferenceDetails conference)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var conf = _mapper.Map<Conference>(conference);
             
             _context.Conferences.Add(conf);

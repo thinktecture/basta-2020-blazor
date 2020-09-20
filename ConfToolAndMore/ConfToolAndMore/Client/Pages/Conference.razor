@@ -5,6 +5,8 @@
 
 <EditForm Model="_conferenceDetails" OnValidSubmit="@SaveConference">
     <DataAnnotationsValidator />
+    <FluentValidationValidator />
+
     <ValidationSummary />
 
     <div class="form-group">
@@ -32,7 +34,7 @@
             </InputSelect>
 
             <BlazoredTypeahead SearchMethod="FilterCountries"
-                @bind-Value="_conferenceDetails.Country">
+                               @bind-Value="_conferenceDetails.Country">
                 <SelectedTemplate Context="country">
                     @country
                 </SelectedTemplate>

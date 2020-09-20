@@ -12,6 +12,8 @@ using AutoMapper;
 using System;
 using ConfToolAndMore.Server.Hubs;
 using IdentityServer4.AccessTokenValidation;
+using FluentValidation.AspNetCore;
+using ConfToolAndMore.Shared;
 
 namespace ConfToolAndMore.Server
 {
@@ -28,6 +30,9 @@ namespace ConfToolAndMore.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<ConferenceDetailsValidator>());
+
             services.AddAuthentication(IdentityServerAuthenticationDefaults.AuthenticationScheme)
                 .AddIdentityServerAuthentication(options =>
                 {
