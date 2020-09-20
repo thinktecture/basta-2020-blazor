@@ -10,6 +10,7 @@ using ConfToolAndMore.Server.Model;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using System;
+using ConfToolAndMore.Server.Hubs;
 
 namespace ConfToolAndMore.Server
 {
@@ -26,6 +27,8 @@ namespace ConfToolAndMore.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSignalR();
+
             services.AddDbContext<ConferencesDbContext>(
                 options => options.UseInMemoryDatabase(databaseName: "ConfTool"));
 
@@ -69,6 +72,7 @@ namespace ConfToolAndMore.Server
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
+                endpoints.MapHub<ConferencesHub>("/conferencesHub");
                 endpoints.MapFallbackToFile("index.html");
             });
         }
