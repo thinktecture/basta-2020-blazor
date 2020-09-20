@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using ConfToolAndMore.Client.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using Blazored.Toast;
 
 namespace ConfToolAndMore.Client
 {
@@ -26,6 +27,7 @@ namespace ConfToolAndMore.Client
             builder.Services.AddScoped<CountriesClientService>();
 
             builder.Services.AddAlerts();
+            builder.Services.AddBlazoredToast();
 
             builder.Services.AddOidcAuthentication(options =>
             {

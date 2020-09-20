@@ -7,6 +7,7 @@
 
 @inject ConfToolAndMore.Client.Services.ConferencesClientService _conferencesClient
 @inject NavigationManager _navigation
+@inject IToastService _toastService
 
 <h1>Conferences</h1>
 
@@ -50,6 +51,8 @@ else
         _hubConnection.On("NewConferenceAdded", async () =>
         {
             Console.WriteLine("###SignalR - NEW conference added!");
+
+            _toastService.ShowInfo("Conference list changed.");
             _conferences = await ListConferences();
 
             StateHasChanged();
