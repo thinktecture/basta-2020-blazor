@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30420.98
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfToolAndMore.Server", "ConfToolAndMore\Server\ConfToolAndMore.Server.csproj", "{479A2E7E-9323-4C97-8806-ACAC5BB800BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfToolAndMore.Server", "ConfToolAndMore\Server\ConfToolAndMore.Server.csproj", "{479A2E7E-9323-4C97-8806-ACAC5BB800BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfToolAndMore.Client", "ConfToolAndMore\Client\ConfToolAndMore.Client.csproj", "{926BEFBD-2DC6-40C3-8271-5B60F00097FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfToolAndMore.Client", "ConfToolAndMore\Client\ConfToolAndMore.Client.csproj", "{926BEFBD-2DC6-40C3-8271-5B60F00097FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfToolAndMore.Shared", "ConfToolAndMore\Shared\ConfToolAndMore.Shared.csproj", "{4305AE42-F124-4B5D-A56A-D4C389B39151}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfToolAndMore.Shared", "ConfToolAndMore\Shared\ConfToolAndMore.Shared.csproj", "{4305AE42-F124-4B5D-A56A-D4C389B39151}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

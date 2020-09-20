@@ -40,5 +40,12 @@ namespace ConfToolAndMore.Client.Pages
                     break;
             }
         }
+
+        private async Task SaveConference()
+        {
+            await _conferencesClient.AddConferenceAsync(_conferenceDetails);
+
+            Console.WriteLine("NEW Conference added...");
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace ConfToolAndMore.Shared.DTO
         public string Country { get; set; }
         [Required] 
         public string City { get; set; }
-        [Required] 
+        
         public string Url { get; set; }
     }
 }

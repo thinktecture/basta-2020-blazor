@@ -33,13 +33,12 @@ namespace ConfToolAndMore.Client.Services
             return result;
         }
 
-        public async Task<ConferenceDetails> AddConference(ConferenceDetails conference)
+        public async Task<ConferenceDetails> AddConferenceAsync(ConferenceDetails conference)
         {
             var result = await (await _httpClient.PostAsJsonAsync(
                 _baseApiUrl, conference)).Content.ReadFromJsonAsync<ConferenceDetails>();
 
             return result;
         }
-
     }
 }

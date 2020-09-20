@@ -1,41 +1,31 @@
 ﻿@page "/conferences/{mode}"
 @page "/conferences/{mode}/{id:guid}"
 
-@switch (Mode)
-{
-    case ConferenceDetailsModes.Show:
-        <h3>Conference Details</h3>
-        break;
+<ConferenceHeader Mode="@Mode" />
 
-    case ConferenceDetailsModes.New:
-        <h3>New Conference</h3>
-        break;
+<EditForm Model="_conferenceDetails" OnValidSubmit="@SaveConference">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
 
-    case ConferenceDetailsModes.Edit:
-        <h3>Edit Conference</h3>
-        break;
-}
-
-<EditForm Model="_conferenceDetails">
     <div class="form-group">
         <label for="title">Title</label>
-        <input disabled="@_isShow" type="text" value="@_conferenceDetails.Title" class="form-control" id="title" placeholder="Title of the conference">
+        <InputText bind-disabled="_isShow" type="text" @bind-Value="_conferenceDetails.Title" class="form-control" id="title" placeholder="Title of the conference"></InputText>
     </div>
     <div class="form-group">
         <label for="city">City</label>
-        <input disabled="@_isShow" type="text" value="@_conferenceDetails.City" class="form-control" id="city" placeholder="Location">
+        <input disabled="@_isShow" type="text" @bind-value="_conferenceDetails.City" class="form-control" id="city" placeholder="Location">
     </div>
     <div class="form-group">
         <label for="country">Country</label>
-        <input disabled="@_isShow" type="text" value="@_conferenceDetails.Country" class="form-control" id="country" placeholder="Location">
+        <input disabled="@_isShow" type="text" @bind-value="_conferenceDetails.Country" class="form-control" id="country" placeholder="Location">
     </div>
     <div class="form-group">
         <label for="datefrom">From</label>
-        <InputDate @bind-Value="@_conferenceDetails.DateFrom" disabled="@_isShow" class="form-control" id="datefrom" placeholder="Begin"></InputDate>
+        <InputDate @bind-Value="_conferenceDetails.DateFrom" disabled="@_isShow" class="form-control" id="datefrom" placeholder="Begin"></InputDate>
     </div>
     <div class="form-group">
         <label for="dateto">To</label>
-        <input disabled="@_isShow" type="date" value="@_conferenceDetails.DateTo" class="form-control" id="dateto" placeholder="End">
+        <input disabled="@_isShow" type="date" @bind-value="_conferenceDetails.DateTo" class="form-control" id="dateto" placeholder="End">
     </div>
 
     @if (Mode != ConferenceDetailsModes.Show)
