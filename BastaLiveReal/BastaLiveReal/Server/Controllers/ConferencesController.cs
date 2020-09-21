@@ -6,21 +6,28 @@ using Microsoft.EntityFrameworkCore;
 using BastaLiveReal.Server.Model;
 using AutoMapper;
 using BastaLiveReal.Shared.DTO;
+using Microsoft.AspNetCore.SignalR;
+using BastaLiveReal.Server.Hubs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BastaLiveReal.Server.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ConferencesController : ControllerBase
     {
         private readonly ConferencesDbContext _context;
         private readonly IMapper _mapper;
+        private readonly IHubContext<ConferencesHub> _hubContext;
 
         public ConferencesController(ConferencesDbContext context,
-            IMapper mapper)
+            IMapper mapper,
+            IHubContext<ConferencesHub> hubContext)
         {
             _context = context;
             _mapper = mapper;
+            _hubContext = hubContext;
         }
 
         // GET: api/Conferences
@@ -53,10 +60,17 @@ namespace BastaLiveReal.Server.Controllers
         public async Task<ActionResult<ConferenceDetails>> PostConference(
             ConferenceDetails conference)
         {
+            if(!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
             var conf = _mapper.Map<Conference>(conference);
 
             _context.Conferences.Add(conf);
             await _context.SaveChangesAsync();
+
+            await _hubContext.Clients.All.SendAsync("NewConferenceAdded");
 
             return CreatedAtAction("GetConference", new { id = conference.ID }, conf);
         }

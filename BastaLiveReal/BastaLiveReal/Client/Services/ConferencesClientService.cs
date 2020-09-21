@@ -15,10 +15,10 @@ namespace BastaLiveReal.Client.Services
         private HttpClient _httpClient;
         private string _baseApiUrl;
 
-        public ConferencesClientService(HttpClient httpClient,
+        public ConferencesClientService(IHttpClientFactory httpClientFactory,
             IConfiguration config)
         {
-            _httpClient = httpClient;
+            _httpClient = httpClientFactory.CreateClient("ConfTool.ServerAPI");
             _baseApiUrl = Path.Combine(config["BaseApiUrl"], "conferences/");
         }
 

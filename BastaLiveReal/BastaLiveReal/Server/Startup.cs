@@ -10,6 +10,10 @@ using BastaLiveReal.Server.Model;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
 using System;
+using FluentValidation.AspNetCore;
+using BastaLiveReal.Shared;
+using BastaLiveReal.Server.Hubs;
+using IdentityServer4.AccessTokenValidation;
 
 namespace BastaLiveReal.Server
 {
@@ -33,6 +37,22 @@ namespace BastaLiveReal.Server
                options => options.UseInMemoryDatabase(
                    databaseName: "ConfTool"));
 
+            services.AddAuthentication(
+                IdentityServerAuthenticationDefaults.AuthenticationScheme)
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.Authority = "https://localhost:5006";
+                    options.ApiName = "api";
+                });
+
+            services.AddAuthorization();
+
+            services.AddSignalR();
+
+            services.AddMvc()
+                .AddFluentValidation(fv => 
+                fv.RegisterValidatorsFromAssemblyContaining<ConferenceDetailsValidator>());
+
             services.AddSwaggerGen();
 
             services.AddControllersWithViews();
@@ -42,6 +62,8 @@ namespace BastaLiveReal.Server
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseAuthentication();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -66,10 +88,13 @@ namespace BastaLiveReal.Server
 
             app.UseRouting();
 
+            app.UseAuthorization();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();
                 endpoints.MapControllers();
+                endpoints.MapHub<ConferencesHub>("/conferencesHub");
                 endpoints.MapFallbackToFile("index.html");
             });
         }

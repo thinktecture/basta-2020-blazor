@@ -16,6 +16,8 @@ namespace BastaLiveReal.Client.Pages
 
         [Inject]
         private ConferencesClientService _conferencesClient { get; set; }
+        [Inject]
+        private IAlertService _alert { get; set; }
 
         private ConferenceDetails _conferenceDetails;
 
@@ -43,6 +45,12 @@ namespace BastaLiveReal.Client.Pages
 
         private async Task SaveConference()
         {
+            if(!await _alert.ConfirmAsync("Are you sure!?"))
+            {
+                Console.WriteLine("User declined to save...");
+                return;
+            }
+
             await _conferencesClient.AddConferenceAsync(_conferenceDetails);
             Console.WriteLine("NEW CONF ADDED...");
         }

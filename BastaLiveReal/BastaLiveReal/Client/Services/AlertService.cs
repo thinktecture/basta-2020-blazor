@@ -1,0 +1,29 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.JSInterop;
+
+namespace BastaLiveReal.Client.Services
+{
+    public class AlertService : IAlertService
+    {
+        private IJSRuntime _jsRuntime { get; }
+
+        public AlertService(IJSRuntime jsRuntime)
+        {
+            _jsRuntime = jsRuntime;
+        }
+
+        public async Task<bool> ConfirmAsync(string message)
+        {
+            return await _jsRuntime.InvokeAsync<bool>("confToolInterop.dialogs.confirm", message);
+        }
+
+        public Task AlertAsync(string message)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+}
