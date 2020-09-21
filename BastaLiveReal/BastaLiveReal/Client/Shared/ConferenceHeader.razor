@@ -1,0 +1,21 @@
+﻿@using BastaLiveReal.Client.Pages
+
+@switch (Mode)
+{
+    case ConferencesDetailsModes.Show:
+        <h3>Conference Details</h3>
+        break;
+
+    case ConferencesDetailsModes.New:
+        <h3>New Conference</h3>
+        break;
+
+    case ConferencesDetailsModes.Edit:
+        <h3>Edit Conference</h3>
+        break;
+}
+
+@code {
+    [Parameter]
+    public string Mode { get; set; }
+}
